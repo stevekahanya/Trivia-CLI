@@ -55,3 +55,13 @@ async function startGame() {
 
   const userAnswers = []; // Array to store user answers for later iteration
   let score = 0;
+  // Loop through each question (using a loop as required)
+  for (const [index, q] of questions.entries()) {
+    console.log(`Question ${index + 1}: ${q.question}`);
+    Object.entries(q.options).forEach(([key, value]) => {
+      console.log(`${key}: ${value}`);
+    });
+
+    try {
+      const answer = await askWithTimeout('Your answer: ', 10000); // 10-second timer per question
+      const normalizedAnswer = answer.trim().toLowerCase();
