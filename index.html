@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Quiz Game UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .difficulty-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .difficulty-btn {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .difficulty-btn:hover {
+            background-color: #0056b3;
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .option:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .timer {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #ff5722;
+        }
+        .result {
+            font-size: 1.5em;
+            color: #4caf50;
+            display: none;
+        }
+        .restart-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+        }
+        .restart-btn:hover {
+            background-color: #0056b3;
+        }
+        .detailed-results {
+            text-align: left;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="difficulty" class="difficulty-selection">
+            <h2>Welcome to the Trivia Quiz Game!</h2>
+            <p>Choose your difficulty level:</p>
+            <button class="difficulty-btn" data-difficulty="easy">Easy (15s per question)</button>
+            <button class="difficulty-btn" data-difficulty="medium">Medium (10s per question)</button>
+            <button class="difficulty-btn" data-difficulty="hard">Hard (5s per question)</button>
+        </div>
+        <div id="game" style="display: none;">
+            <div class="timer">
+                Time Left: <span id="time">15</span>s
+            </div>
+            <div class="question">
+                Question will appear here
+            </div>
+            <div class="options"></div>
+            <div class="result">
+                Your score: <span id="score">0</span> out of <span id="total">0</span>
+            </div>
+            <div class="detailed-results">
+                <h3>Detailed Results:</h3>
+                <div id="details"></div>
+            </div>
+            <button class="restart-btn">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script src="trivia.js"></script>  <!-- Link to the external JS file -->
+</body>
+</html>
