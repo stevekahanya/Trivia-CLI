@@ -1,213 +1,212 @@
-const readline = require('node:readline/promises');
-const { stdin: input, stdout: output } = require('node:process');
-
-const rl = readline.createInterface({ input, output });
-
-// Arrays of trivia questions categorized by difficulty (using arrays as required)
+// Questions categorized by difficulty
 const easyQuestions = [
-  {
-    question: 'What is the capital of France?',
-    options: { a: 'Paris', b: 'London', c: 'Berlin', d: 'Madrid' },
-    correctOption: 'a'
-  },
-  {
-    question: 'What color is the sky on a clear day?',
-    options: { a: 'Green', b: 'Blue', c: 'Red', d: 'Yellow' },
-    correctOption: 'b'
-  },
-  {
-    question: 'How many legs does a dog have?',
-    options: { a: 'Two', b: 'Three', c: 'Four', d: 'Five' },
-    correctOption: 'c'
-  },
-  {
-    question: 'What is the largest ocean on Earth?',
-    options: { a: 'Atlantic', b: 'Indian', c: 'Arctic', d: 'Pacific' },
-    correctOption: 'd'
-  },
-  {
-    question: 'What is 2 + 2?',
-    options: { a: '3', b: '4', c: '5', d: '6' },
-    correctOption: 'b'
-  }
+    {
+        question: 'What is the capital of France?',
+        options: ['Paris', 'London', 'Berlin', 'Madrid'],
+        correctOption: 'Paris'
+    },
+    {
+        question: 'What color is the sky on a clear day?',
+        options: ['Green', 'Blue', 'Red', 'Yellow'],
+        correctOption: 'Blue'
+    },
+    {
+        question: 'How many legs does a dog have?',
+        options: ['Two', 'Three', 'Four', 'Five'],
+        correctOption: 'Four'
+    },
+    {
+        question: 'What is the largest ocean on Earth?',
+        options: ['Atlantic', 'Indian', 'Arctic', 'Pacific'],
+        correctOption: 'Pacific'
+    },
+    {
+        question: 'What is 2 + 2?',
+        options: ['3', '4', '5', '6'],
+        correctOption: '4'
+    }
 ];
 
 const mediumQuestions = [
-  {
-    question: 'Who painted the Mona Lisa?',
-    options: { a: 'Vincent van Gogh', b: 'Leonardo da Vinci', c: 'Pablo Picasso', d: 'Claude Monet' },
-    correctOption: 'b'
-  },
-  {
-    question: 'What is the largest planet in our solar system?',
-    options: { a: 'Earth', b: 'Mars', c: 'Jupiter', d: 'Saturn' },
-    correctOption: 'c'
-  },
-  {
-    question: 'What is the chemical symbol for gold?',
-    options: { a: 'Au', b: 'Ag', c: 'Fe', d: 'Cu' },
-    correctOption: 'a'
-  },
-  {
-    question: 'Who wrote "To Kill a Mockingbird"?',
-    options: { a: 'Harper Lee', b: 'J.K. Rowling', c: 'Mark Twain', d: 'Jane Austen' },
-    correctOption: 'a'
-  },
-  {
-    question: 'What year did the Titanic sink?',
-    options: { a: '1905', b: '1912', c: '1920', d: '1931' },
-    correctOption: 'b'
-  }
+    {
+        question: 'Who painted the Mona Lisa?',
+        options: ['Vincent van Gogh', 'Leonardo da Vinci', 'Pablo Picasso', 'Claude Monet'],
+        correctOption: 'Leonardo da Vinci'
+    },
+    {
+        question: 'What is the largest planet in our solar system?',
+        options: ['Earth', 'Mars', 'Jupiter', 'Saturn'],
+        correctOption: 'Jupiter'
+    },
+    {
+        question: 'What is the chemical symbol for gold?',
+        options: ['Au', 'Ag', 'Fe', 'Cu'],
+        correctOption: 'Au'
+    },
+    {
+        question: 'Who wrote "To Kill a Mockingbird"?',
+        options: ['Harper Lee', 'J.K. Rowling', 'Mark Twain', 'Jane Austen'],
+        correctOption: 'Harper Lee'
+    },
+    {
+        question: 'What year did the Titanic sink?',
+        options: ['1905', '1912', '1920', '1931'],
+        correctOption: '1912'
+    }
 ];
 
 const hardQuestions = [
-  {
-    question: 'What is the smallest prime number?',
-    options: { a: '1', b: '2', c: '3', d: '5' },
-    correctOption: 'b'
-  },
-  {
-    question: 'Who discovered penicillin?',
-    options: { a: 'Alexander Fleming', b: 'Marie Curie', c: 'Albert Einstein', d: 'Isaac Newton' },
-    correctOption: 'a'
-  },
-  {
-    question: 'What is the speed of light in vacuum (km/s)?',
-    options: { a: '300,000', b: '150,000', c: '500,000', d: '1,000,000' },
-    correctOption: 'a'
-  },
-  {
-    question: 'Which element has the atomic number 1?',
-    options: { a: 'Helium', b: 'Hydrogen', c: 'Carbon', d: 'Oxygen' },
-    correctOption: 'b'
-  },
-  {
-    question: 'What is the longest river in the world?',
-    options: { a: 'Amazon', b: 'Nile', c: 'Yangtze', d: 'Mississippi' },
-    correctOption: 'b'
-  }
+    {
+        question: 'What is the smallest prime number?',
+        options: ['1', '2', '3', '5'],
+        correctOption: '2'
+    },
+    {
+        question: 'Who discovered penicillin?',
+        options: ['Alexander Fleming', 'Marie Curie', 'Albert Einstein', 'Isaac Newton'],
+        correctOption: 'Alexander Fleming'
+    },
+    {
+        question: 'What is the speed of light in vacuum (km/s)?',
+        options: ['300,000', '150,000', '500,000', '1,000,000'],
+        correctOption: '300,000'
+    },
+    {
+        question: 'Which element has the atomic number 1?',
+        options: ['Helium', 'Hydrogen', 'Carbon', 'Oxygen'],
+        correctOption: 'Hydrogen'
+    },
+    {
+        question: 'What is the longest river in the world?',
+        options: ['Amazon', 'Nile', 'Yangtze', 'Mississippi'],
+        correctOption: 'Nile'
+    }
 ];
 
-/**
- * Function to get the questions and timeout based on difficulty.
- * @param {string} difficulty - The chosen difficulty level.
- * @returns {{questions: Array, timeout: number}} - Questions array and timeout in ms.
- */
-function getQuestionsByDifficulty(difficulty) {
-  switch (difficulty) {
-    case 'easy':
-      return { questions: easyQuestions, timeout: 15000 }; // 15 seconds
-    case 'medium':
-      return { questions: mediumQuestions, timeout: 10000 }; // 10 seconds
-    case 'hard':
-      return { questions: hardQuestions, timeout: 5000 }; // 5 seconds
-    default:
-      throw new Error('Invalid difficulty level');
-  }
-}
+let quizData = [];
+let currentQuestion = 0;
+let score = 0;
+let timeLeft = 15; // Default for easy
+let timerInterval;
+let userAnswers = [];
 
-/**
- * Function to ask a question with a timer.
- * @param {string} prompt - The prompt to display to the user.
- * @param {number} timeoutMs - The timeout in milliseconds.
- * @returns {Promise<string>} - Resolves with user input or rejects on timeout.
- */
-function askWithTimeout(prompt, timeoutMs) {
-  const questionPromise = rl.question(prompt);
-  
-  const timeoutPromise = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('Time\'s up!')), timeoutMs)
-  );
+const difficultySection = document.getElementById('difficulty');
+const gameSection = document.getElementById('game');
+const timerEl = document.getElementById('time');
+const questionEl = document.querySelector('.question');
+const optionsEl = document.querySelector('.options');
+const resultEl = document.querySelector('.result');
+const scoreEl = document.getElementById('score');
+const totalEl = document.getElementById('total');
+const detailsEl = document.getElementById('details');
+const detailedResultsEl = document.querySelector('.detailed-results');
+const restartBtn = document.querySelector('.restart-btn');
 
-  return Promise.race([questionPromise, timeoutPromise]);
-}
-
-/**
- * Main function to start and run the trivia game.
- */
-async function startGame() {
-  console.log('Welcome to the Trivia Quiz Game!');
-  console.log('Choose your difficulty level: easy, medium, or hard.');
-
-  let difficulty;
-  while (true) {
-    difficulty = (await rl.question('Your choice: ')).trim().toLowerCase();
-    if (['easy', 'medium', 'hard'].includes(difficulty)) {
-      break;
-    }
-    console.log('Invalid choice. Please select easy, medium, or hard.');
-  }
-
-  const { questions, timeout } = getQuestionsByDifficulty(difficulty);
-
-  console.log(`\nYou chose ${difficulty}. You have ${timeout / 1000} seconds to answer each question.`);
-  console.log('Answer with a, b, c, or d.');
-  console.log('Let\'s begin!\n');
-
-  const userAnswers = []; // Array to store user answers for later iteration
-  let score = 0;
-
-  // Loop through each question (using a loop as required)
-  for (const [index, q] of questions.entries()) {
-    console.log(`Question ${index + 1}: ${q.question}`);
-    Object.entries(q.options).forEach(([key, value]) => {
-      console.log(`${key}: ${value}`);
+// Handle difficulty selection
+document.querySelectorAll('.difficulty-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const difficulty = e.target.dataset.difficulty;
+        switch (difficulty) {
+            case 'easy':
+                quizData = easyQuestions;
+                timeLeft = 15;
+                break;
+            case 'medium':
+                quizData = mediumQuestions;
+                timeLeft = 10;
+                break;
+            case 'hard':
+                quizData = hardQuestions;
+                timeLeft = 5;
+                break;
+        }
+        difficultySection.style.display = 'none';
+        gameSection.style.display = 'block';
+        loadQuestion();
     });
-
-    try {
-      const answer = await askWithTimeout('Your answer: ', timeout);
-      const normalizedAnswer = answer.trim().toLowerCase();
-
-      // Validate answer (must be a, b, c, or d)
-      if (!['a', 'b', 'c', 'd'].includes(normalizedAnswer)) {
-        console.log('Invalid answer! Please choose a, b, c, or d.');
-        userAnswers.push(null); // Invalid counts as wrong
-        console.log(`The correct answer was: ${q.correctOption} - ${q.options[q.correctOption]}\n`);
-        continue;
-      }
-
-      userAnswers.push(normalizedAnswer);
-
-      if (normalizedAnswer === q.correctOption) {
-        console.log('Correct!\n');
-        score++;
-      } else {
-        console.log('Incorrect!');
-        console.log(`The correct answer was: ${q.correctOption} - ${q.options[q.correctOption]}\n`);
-      }
-    } catch (error) {
-      console.error(error.message);
-      console.log(`The correct answer was: ${q.correctOption} - ${q.options[q.correctOption]}\n`);
-      userAnswers.push(null); // Timeout counts as wrong
-    }
-  }
-
-  // Use array iteration method (filter) to calculate correct answers (as required)
-  const correctAnswers = questions.filter((q, i) => userAnswers[i] === q.correctOption).length;
-
-  // Display final feedback
-  console.log('Game Over!');
-  console.log(`Your score: ${correctAnswers} out of ${questions.length}`);
-
-  // Optional: Detailed results using map for formatting
-  const detailedResults = questions.map((q, i) => {
-    const userAnswer = userAnswers[i] ? `${userAnswers[i].toUpperCase()}: ${q.options[userAnswers[i]]}` : 'No answer (timeout/invalid)';
-    return `Question ${i + 1}: ${userAnswer} (Correct: ${q.correctOption.toUpperCase()}: ${q.options[q.correctOption]})`;
-  });
-  console.log('Detailed Results:');
-  detailedResults.forEach(result => console.log(result));
-
-  rl.close();
-}
-
-// Handle errors and close interface properly
-rl.on('close', () => {
-  console.log('Thanks for playing!');
-  process.exit(0);
 });
 
-// Start the game
-startGame().catch(error => {
-  console.error('An error occurred:', error);
-  rl.close();
+// Function to load the question
+function loadQuestion() {
+    if (currentQuestion >= quizData.length) {
+        endQuiz();
+        return;
+    }
+    clearInterval(timerInterval);
+    timerEl.textContent = timeLeft;
+    startTimer();
+
+    const currentQuiz = quizData[currentQuestion];
+    questionEl.textContent = currentQuiz.question;
+    optionsEl.innerHTML = ''; // Clear previous options
+
+    currentQuiz.options.forEach(option => {
+        const button = document.createElement('button');
+        button.classList.add('option');
+        button.textContent = option;
+        button.onclick = () => checkAnswer(option);
+        optionsEl.appendChild(button);
+    });
+}
+
+// Check the answer
+function checkAnswer(selectedOption) {
+    clearInterval(timerInterval);
+    userAnswers.push(selectedOption);
+    if (selectedOption === quizData[currentQuestion].correctOption) {
+        score++;
+    }
+    currentQuestion++;
+    loadQuestion();
+}
+
+// Start the timer
+function startTimer() {
+    let remaining = timeLeft;
+    timerEl.textContent = remaining;
+    timerInterval = setInterval(() => {
+        remaining--;
+        timerEl.textContent = remaining;
+        if (remaining <= 0) {
+            clearInterval(timerInterval);
+            userAnswers.push(null); // Timeout
+            currentQuestion++;
+            loadQuestion();
+        }
+    }, 1000);
+}
+
+// End the quiz and show the results
+function endQuiz() {
+    clearInterval(timerInterval);
+    questionEl.style.display = 'none';
+    optionsEl.style.display = 'none';
+    document.querySelector('.timer').style.display = 'none';
+    resultEl.style.display = 'block';
+    detailedResultsEl.style.display = 'block';
+    scoreEl.textContent = score;
+    totalEl.textContent = quizData.length;
+    restartBtn.style.display = 'block';
+
+    // Display detailed results using map
+    const detailedResults = quizData.map((q, i) => {
+        const userAnswer = userAnswers[i] ? userAnswers[i] : 'No answer (timeout)';
+        return `Question ${i + 1}: ${userAnswer} (Correct: ${q.correctOption})`;
+    });
+    detailsEl.innerHTML = detailedResults.join('<br>');
+}
+
+// Restart the quiz
+restartBtn.addEventListener('click', () => {
+    difficultySection.style.display = 'flex';
+    gameSection.style.display = 'none';
+    questionEl.style.display = 'block';
+    optionsEl.style.display = 'flex';
+    document.querySelector('.timer').style.display = 'block';
+    resultEl.style.display = 'none';
+    detailedResultsEl.style.display = 'none';
+    restartBtn.style.display = 'none';
+    currentQuestion = 0;
+    score = 0;
+    userAnswers = [];
 });
