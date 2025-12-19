@@ -31,3 +31,17 @@ const questions = [
     correctOption: 'a'
   }
 ];
+/**
+ * Function to ask a question with a timer.
+ * @param {string} prompt - The prompt to display to the user.
+ * @returns {Promise<string>} - Resolves with user input or rejects on timeout.
+ */
+function askWithTimeout(prompt, timeoutMs) {
+  const questionPromise = rl.question(prompt);
+  
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Time\'s up!')), timeoutMs)
+  );
+
+  return Promise.race([questionPromise, timeoutPromise]);
+}
