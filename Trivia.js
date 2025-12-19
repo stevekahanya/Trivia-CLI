@@ -45,3 +45,13 @@ function askWithTimeout(prompt, timeoutMs) {
 
   return Promise.race([questionPromise, timeoutPromise]);
 }
+/**
+ * Main function to start and run the trivia game.
+ */
+async function startGame() {
+  console.log('Welcome to the Trivia Quiz Game!');
+  console.log('You have 10 seconds to answer each question. Answer with a, b, c, or d.');
+  console.log('Let\'s begin!\n');
+
+  const userAnswers = []; // Array to store user answers for later iteration
+  let score = 0;
