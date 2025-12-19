@@ -65,3 +65,26 @@ async function startGame() {
     try {
       const answer = await askWithTimeout('Your answer: ', 10000); // 10-second timer per question
       const normalizedAnswer = answer.trim().toLowerCase();
+      // Validate answer (must be a, b, c, or d)
+      if (!['a', 'b', 'c', 'd'].includes(normalizedAnswer)) {
+        console.log('Invalid answer! Please choose a, b, c, or d.');
+        userAnswers.push(null); // Invalid counts as wrong
+        console.log(`The correct answer was: ${q.correctOption} - ${q.options[q.correctOption]}\n`);
+        continue;
+      }
+
+      userAnswers.push(normalizedAnswer);
+
+      if (normalizedAnswer === q.correctOption) {
+        console.log('Correct!\n');
+        score++;
+      } else {
+        console.log('Incorrect!');
+        console.log(`The correct answer was: ${q.correctOption} - ${q.options[q.correctOption]}\n`);
+      }
+    } catch (error) {
+      console.error(error.message);
+      console.log(`The correct answer was: ${q.correctOption} - ${q.options[q.correctOption]}\n`);
+      userAnswers.push(null); // Timeout counts as wrong
+    }
+  }
