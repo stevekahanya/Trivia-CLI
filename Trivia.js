@@ -88,3 +88,31 @@ async function startGame() {
       userAnswers.push(null); // Timeout counts as wrong
     }
   }
+  // Use array iteration method (filter) to calculate correct answers (as required)
+  const correctAnswers = questions.filter((q, i) => userAnswers[i] === q.correctOption).length;
+
+  // Display final feedback
+  console.log('Game Over!');
+  console.log(`Your score: ${correctAnswers} out of ${questions.length}`);
+
+  // Optional: Detailed results using map for formatting
+  const detailedResults = questions.map((q, i) => {
+    const userAnswer = userAnswers[i] ? `${userAnswers[i].toUpperCase()}: ${q.options[userAnswers[i]]}` : 'No answer (timeout/invalid)';
+    return `Question ${i + 1}: ${userAnswer} (Correct: ${q.correctOption.toUpperCase()}: ${q.options[q.correctOption]})`;
+  });
+  console.log('Detailed Results:');
+  detailedResults.forEach(result => console.log(result));
+
+  rl.close();
+}
+// Handle errors and close interface properly
+rl.on('close', () => {
+  console.log('Thanks for playing!');
+  process.exit(0);
+});
+
+// Start the game
+startGame().catch(error => {
+  console.error('An error occurred:', error);
+  rl.close();
+});
