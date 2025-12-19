@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,91 +7,133 @@
     <title>Trivia Quiz Game UI</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
         .quiz-container {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             width: 90%;
-            max-width: 600px;
-            padding: 20px;
+            max-width: 700px;
+            padding: 30px;
             text-align: center;
             box-sizing: border-box;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .difficulty-selection {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
         .difficulty-btn {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .difficulty-btn:hover {
-            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
         }
         .question {
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            font-size: 1.4em;
+            margin-bottom: 25px;
+            color: #333;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         .options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         .option {
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
+            background: #f9f9f9;
+            color: #333;
+            font-size: 1.1em;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
         }
         .option:hover {
-            background-color: #007bff;
+            background: #007bff;
             color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
         }
         .timer {
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            font-size: 1.3em;
+            margin-bottom: 25px;
             color: #ff5722;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        .timer::before {
+            content: '⏳';
         }
         .result {
-            font-size: 1.5em;
+            font-size: 1.6em;
             color: #4caf50;
             display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.5s;
         }
         .restart-btn {
-            background-color: #007bff;
-            color: #fff;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
             border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 10px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 25px;
             display: none;
+            transition: transform 0.2s;
         }
         .restart-btn:hover {
-            background-color: #0056b3;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #8fd3f4 0%, #84fab0 100%);
         }
         .detailed-results {
             text-align: left;
-            margin-top: 20px;
+            margin-top: 25px;
             display: none;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            color: #333;
+            font-size: 1em;
+        }
+        .detailed-results h3 {
+            margin-bottom: 10px;
+            color: #555;
         }
     </style>
 </head>
@@ -122,6 +165,7 @@
         </div>
     </div>
 
-    <script src="trivia.js"></script>  <!-- Link to the external JS file -->
+    <script src="trivia.js"></script>
 </body>
 </html>
+```
