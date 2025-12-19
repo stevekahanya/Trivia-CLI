@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001f3f 0%, #0074D9 100%); /* Darker blue gradient for better overall contrast */
             color: #fff;
             margin: 0;
             padding: 0;
@@ -19,9 +18,9 @@
             overflow: hidden;
         }
         .quiz-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: #ffffff; /* Solid white for maximum contrast */
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow for depth */
             width: 90%;
             max-width: 700px;
             padding: 30px;
@@ -40,8 +39,8 @@
         }
         .difficulty-btn {
             padding: 12px 20px;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            color: #333;
+            background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%); /* High-contrast yellow-orange gradient */
+            color: #000000; /* Black text for maximum readability */
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -51,13 +50,13 @@
         }
         .difficulty-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%); /* Darker on hover for feedback */
         }
         .question {
             font-size: 1.4em;
             margin-bottom: 25px;
-            color: #333;
+            color: #000000; /* Black for high contrast on white bg */
             animation: slideIn 0.3s ease;
         }
         @keyframes slideIn {
@@ -71,24 +70,24 @@
         }
         .option {
             padding: 12px;
-            border: 2px solid #ddd;
+            border: 2px solid #333333; /* Darker border for visibility */
             border-radius: 10px;
             cursor: pointer;
-            background: #f9f9f9;
-            color: #333;
+            background: #f0f0f0; /* Light gray bg for subtle contrast */
+            color: #000000; /* Black text */
             font-size: 1.1em;
             transition: background 0.3s, color 0.3s, transform 0.2s;
         }
         .option:hover {
-            background: #007bff;
-            color: #fff;
+            background: #0056b3; /* Darker blue on hover */
+            color: #ffffff; /* White text for contrast */
             transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 86, 179, 0.4);
         }
         .timer {
             font-size: 1.3em;
             margin-bottom: 25px;
-            color: #ff5722;
+            color: #d00000; /* Darker red for urgency and contrast */
             font-weight: bold;
             display: flex;
             justify-content: center;
@@ -100,14 +99,14 @@
         }
         .result {
             font-size: 1.6em;
-            color: #4caf50;
+            color: #006400; /* Dark green for success and contrast */
             display: none;
             margin-top: 20px;
             animation: fadeIn 0.5s;
         }
         .restart-btn {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            color: #333;
+            background: linear-gradient(135deg, #00cc66 0%, #00994d 100%); /* High-contrast green gradient */
+            color: #000000; /* Black text */
             border: none;
             padding: 12px 25px;
             font-size: 1.1em;
@@ -119,21 +118,21 @@
         }
         .restart-btn:hover {
             transform: scale(1.05);
-            background: linear-gradient(135deg, #8fd3f4 0%, #84fab0 100%);
+            background: linear-gradient(135deg, #00994d 0%, #006633 100%); /* Darker on hover */
         }
         .detailed-results {
             text-align: left;
             margin-top: 25px;
             display: none;
-            background: #f0f0f0;
+            background: #e6e6e6; /* Slightly darker gray for contrast */
             padding: 15px;
             border-radius: 10px;
-            color: #333;
+            color: #000000; /* Black text */
             font-size: 1em;
         }
         .detailed-results h3 {
             margin-bottom: 10px;
-            color: #555;
+            color: #333333; /* Dark gray */
         }
     </style>
 </head>
@@ -168,4 +167,3 @@
     <script src="trivia.js"></script>
 </body>
 </html>
-```
