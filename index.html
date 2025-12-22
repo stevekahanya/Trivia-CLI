@@ -51,12 +51,13 @@
             cursor: pointer;
             font-size: 1.1em;
             font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, opacity 0.3s ease;
         }
         .difficulty-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-            background: rgba(255, 153, 0, 0.3); /* Slightly more opaque on hover */
+            transform: scale(1.05) rotate(2deg); /* Enhanced with slight rotation for fun */
+            box-shadow: 0 6px 15px rgba(255, 153, 0, 0.5); /* Glowing shadow */
+            background: rgba(255, 153, 0, 0.4); /* More opaque and vibrant */
+            opacity: 0.95; /* Subtle fade for depth */
         }
         .question {
             font-size: 1.4em;
@@ -83,13 +84,14 @@
             cursor: pointer;
             color: #ffffff; /* White text */
             font-size: 1.1em;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .option:hover {
-            background: rgba(0, 86, 179, 0.3); /* Darker blue tint on hover */
+            background: rgba(0, 86, 179, 0.4); /* More vibrant tint */
             color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 86, 179, 0.4);
+            transform: translateY(-5px) scale(1.02); /* Lift higher with slight scale */
+            box-shadow: 0 6px 15px rgba(0, 86, 179, 0.6); /* Stronger glow */
+            border-color: rgba(255, 255, 255, 0.5); /* Brighter border for emphasis */
         }
         .timer {
             font-size: 1.3em;
@@ -123,11 +125,13 @@
             cursor: pointer;
             margin-top: 25px;
             display: none;
-            transition: transform 0.2s, background 0.3s;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
         }
         .restart-btn:hover {
-            transform: scale(1.05);
-            background: rgba(0, 153, 77, 0.3); /* Darker tint on hover */
+            transform: scale(1.08) rotate(-2deg); /* Scale larger with counter-rotation */
+            background: rgba(0, 153, 77, 0.4); /* More vibrant */
+            box-shadow: 0 6px 15px rgba(0, 204, 102, 0.5); /* Glowing green shadow */
+            opacity: 0.95;
         }
         .detailed-results {
             text-align: left;
