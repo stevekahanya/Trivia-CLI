@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,6 +60,12 @@
             background: rgba(255, 153, 0, 0.4); /* More opaque and vibrant */
             opacity: 0.95; /* Subtle fade for depth */
         }
+        .difficulty-btn:focus {
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.7), 0 6px 15px rgba(255, 153, 0, 0.5); /* Accessible focus ring with glow */
+            background: rgba(255, 153, 0, 0.4);
+            transform: scale(1.05);
+        }
         .question {
             font-size: 1.4em;
             margin-bottom: 25px;
@@ -92,6 +99,13 @@
             transform: translateY(-5px) scale(1.02); /* Lift higher with slight scale */
             box-shadow: 0 6px 15px rgba(0, 86, 179, 0.6); /* Stronger glow */
             border-color: rgba(255, 255, 255, 0.5); /* Brighter border for emphasis */
+        }
+        .option:focus {
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.7), 0 6px 15px rgba(0, 86, 179, 0.6); /* Accessible focus ring with glow */
+            background: rgba(0, 86, 179, 0.4);
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         .timer {
             font-size: 1.3em;
@@ -132,6 +146,12 @@
             background: rgba(0, 153, 77, 0.4); /* More vibrant */
             box-shadow: 0 6px 15px rgba(0, 204, 102, 0.5); /* Glowing green shadow */
             opacity: 0.95;
+        }
+        .restart-btn:focus {
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 0 3px rgba(0, 204, 102, 0.7), 0 6px 15px rgba(0, 204, 102, 0.5); /* Accessible focus ring with glow */
+            background: rgba(0, 153, 77, 0.4);
+            transform: scale(1.08);
         }
         .detailed-results {
             text-align: left;
