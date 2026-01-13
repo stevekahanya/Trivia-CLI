@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "text": "Which keyword is used to declare a constant in JavaScript?",
+    "options": ["var", "let", "const", "fixed"],
+    "correctAnswer": "const"
+  },
+  {
+    "id": 2,
+    "text": "What does DOM stand for?",
+    "options": ["Data Object Model", "Document Object Model", "Display Object Management", "Digital Ordinance Model"],
+    "correctAnswer": "Document Object Model"
+  },
+  {
+    "id": 3,
+    "text": "Which method removes the last element from an array?",
+    "options": ["shift()", "unshift()", "pop()", "push()"],
+    "correctAnswer": "pop()"
+  },
+  {
+    "id": 4,
+    "text": "How do you start a promise chain?",
+    "options": ["new Promise()", "Promise.start()", "init Promise", "await new"],
+    "correctAnswer": "new Promise()"
+  },
+  {
+    "id": 5,
+    "text": "Which symbol is used for comments in JSON?",
+    "options": ["//", "#", "", "None (JSON does not support comments)"],
+    "correctAnswer": "None (JSON does not support comments)"
+  }
+]
