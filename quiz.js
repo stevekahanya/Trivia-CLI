@@ -1,95 +1,74 @@
 const readline = require('readline');
-
-
-// DATA STRUCTURES (Requirements: Arrays, Objects)
-
-const questions = [
-  {
-    id: 1,
-    text: "Which keyword is used to declare a constant in JavaScript?",
-    options: ["var", "let", "const", "fixed"],
-    correctAnswer: "const"
-  },
-  {
-    id: 2,
-    text: "What does DOM stand for?",
-    options: ["Data Object Model", "Document Object Model", "Display Object Management", "Digital Ordinance Model"],
-    correctAnswer: "Document Object Model"
-  },
-  {
-    id: 3,
-    text: "Which method removes the last element from an array?",
-    options: ["shift()", "unshift()", "pop()", "push()"],
-    correctAnswer: "pop()"
-  },
-  {
-    id: 4,
-    text: "How do you start a promise chain?",
-    options: ["new Promise()", "Promise.start()", "init Promise", "await new"],
-    correctAnswer: "new Promise()"
-  }
-];
+// Import the File System module (Promise version)
+const fs = require('fs/promises');
 
 // Configuration
-const TIME_LIMIT_PER_QUESTION = 10000; // 10 seconds in milliseconds
+const TIME_LIMIT_PER_QUESTION = 10000; // 10 seconds
+const DATA_FILE = './questions.json';
 
-// Initialize Readline Interface
+// Initialize Readline
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-
-// HELPER FUNCTIONS (Requirements: Functions, Clarity)
-
+// ------------------------------------------------------------------
+// HELPER FUNCTIONS
+// ------------------------------------------------------------------
 
 /**
- * Wraps readline in a Promise to allow 'await' syntax.
- * @param {string} query - The text to display to the user.
- * @returns {Promise<string>} - The user's input.
+ * Loads questions from a JSON file.
+ * returns {Promise<Array>}
  */
+const loadQuestions = async () => {
+  try {
+    // Read the file contents as a string
+    const data = await fs.readFile(DATA_FILE, 'utf8');
+    // Parse the string into a JavaScript Array/Object
+    return JSON.parse(data);
+  } catch (error) {
+    console.error("Error loading questions:", error.message);
+    console.error("Make sure 'questions.json' exists and is valid JSON.");
+    process.exit(1); // Exit the program if we have no data
+  }
+};
+
 const ask = (query) => {
   return new Promise((resolve) => rl.question(query, resolve));
 };
 
-/**
- * A timer promise that rejects after a specific duration.
- * Used for the "Timed Feature" requirement.
- */
 const timer = (ms) => {
   return new Promise((_, reject) => {
     setTimeout(() => reject(new Error("TIMEOUT")), ms);
   });
 };
 
-/**
- * Validates the input. 
- * Checks if input is a number and within the range of options.
- */
 const validateInput = (input, optionsLength) => {
     const num = parseInt(input);
     return !isNaN(num) && num > 0 && num <= optionsLength;
 };
 
-
-// MAIN GAME LOGIC (Requirements: Loops, Async, Control Flow)
-
+// ------------------------------------------------------------------
+// MAIN GAME LOGIC
+// ------------------------------------------------------------------
 
 const runQuiz = async () => {
+  // Load data dynamically before starting
+  console.log("Loading questions...");
+  const questions = await loadQuestions();
+
   console.log("\n===========================================");
   console.log("Welcome to the JS CLI Trivia Game!");
+  console.log(`Loaded ${questions.length} questions.`);
   console.log(`You have ${TIME_LIMIT_PER_QUESTION / 1000} seconds per question.`);
   console.log("===========================================\n");
 
   let score = 0;
-  // We will store user answers here to use Array Iteration later
   let userHistory = []; 
 
-  // Loop through questions sequentially
   for (let i = 0; i < questions.length; i++) {
     const currentQ = questions[i];
     
-    // Display Question
     console.log(`Question ${i + 1}: ${currentQ.text}`);
     currentQ.options.forEach((opt, index) => {
       console.log(`  ${index + 1}. ${opt}`);
@@ -99,14 +78,11 @@ const runQuiz = async () => {
     let timeOutOccurred = false;
 
     try {
-      // PROMISE.RACE: This satisfies "Integrate asynchronous JavaScript feature"
-      // We race the user's input against the timer. Whichever finishes first wins.
       const input = await Promise.race([
         ask(`\nEnter choice (1-${currentQ.options.length}): `),
         timer(TIME_LIMIT_PER_QUESTION)
       ]);
 
-      // Process Input
       if (validateInput(input, currentQ.options.length)) {
         answerIndex = parseInt(input) - 1;
       } else {
@@ -122,22 +98,18 @@ const runQuiz = async () => {
       }
     }
 
-    // Determine correctness
     const selectedOption = answerIndex >= 0 ? currentQ.options[answerIndex] : "No Answer";
     const isCorrect = !timeOutOccurred && selectedOption === currentQ.correctAnswer;
 
-    // Immediate Feedback
     if (isCorrect) {
       console.log("✅ Correct!");
       score++;
     } else if (!timeOutOccurred) {
       console.log(`❌ Wrong! The correct answer was: ${currentQ.correctAnswer}`);
     } else {
-        // Timeout feedback already given above
         console.log(`The correct answer was: ${currentQ.correctAnswer}`);
     }
     
-    // Save history for final report
     userHistory.push({
       question: currentQ.text,
       isCorrect: isCorrect,
@@ -148,28 +120,25 @@ const runQuiz = async () => {
     console.log("-------------------------------------------\n");
   }
 
-  // End Game
-  displayResults(score, userHistory);
+  displayResults(score, userHistory, questions.length);
   rl.close();
 };
 
+// ------------------------------------------------------------------
+// REPORTING
+// ------------------------------------------------------------------
 
-// REPORTING (Requirements: Array Iteration Methods - map/filter)
-
-
-const displayResults = (score, history) => {
+const displayResults = (score, history, totalQuestions) => {
   console.log("================ GAME OVER ================");
-  console.log(`Final Score: ${score} / ${questions.length}`);
+  console.log(`Final Score: ${score} / ${totalQuestions}`);
   
-  const percentage = (score / questions.length) * 100;
-  console.log(`Percentage: ${percentage}%`);
+  const percentage = (score / totalQuestions) * 100;
+  console.log(`Percentage: ${percentage.toFixed(2)}%`); // Added .toFixed(2) for clean decimals
 
-  // Requirement: Use an array iteration method (filter)
   const wrongAnswers = history.filter(item => !item.isCorrect);
 
   if (wrongAnswers.length > 0) {
     console.log("\n--- Review Area (Questions you missed) ---");
-    // Requirement: Use an array iteration method (map or forEach)
     wrongAnswers.forEach((item, index) => {
       console.log(`${index + 1}. ${item.question}`);
       console.log(`   You answered: ${item.userAnswer}`);
@@ -181,5 +150,4 @@ const displayResults = (score, history) => {
   console.log("===========================================");
 };
 
-// Start the application
 runQuiz();
