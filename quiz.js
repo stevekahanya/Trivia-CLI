@@ -12,9 +12,9 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// ------------------------------------------------------------------
+
 // HELPER FUNCTIONS
-// ------------------------------------------------------------------
+
 
 /**
  * Loads questions from a JSON file.
@@ -48,9 +48,9 @@ const validateInput = (input, optionsLength) => {
     return !isNaN(num) && num > 0 && num <= optionsLength;
 };
 
-// ------------------------------------------------------------------
+
 // MAIN GAME LOGIC
-// ------------------------------------------------------------------
+
 
 const runQuiz = async () => {
   // Load data dynamically before starting
@@ -124,9 +124,9 @@ const runQuiz = async () => {
   rl.close();
 };
 
-// ------------------------------------------------------------------
+
 // REPORTING
-// ------------------------------------------------------------------
+
 
 const displayResults = (score, history, totalQuestions) => {
   console.log("================ GAME OVER ================");
